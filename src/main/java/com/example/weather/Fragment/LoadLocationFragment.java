@@ -39,14 +39,15 @@ public class LoadLocationFragment extends Fragment{
     public static final int LEVEL_CITY=1;
     public static final int LEVEL_COUNTY=2;
     private int current_level;//标识现在数据属于哪一个等级
+
     private Province selectProvince;//选择的省份
     private City selectCity;//所选择的城市
-    private List<Province>province;
-    private List<City>city;
-    private List<County>county;
+    private List<Province>province;//存放省份信息的列表
+    private List<City>city;//存放地级市信息的列表
+    private List<County>county;//存放地级市下的县，市信息的列表
     private Button back_but;
     private TextView title_text;
-    private ListView listView;
+    private ListView listView;//显示位置信息的ListView
     private View view;
     private ArrayAdapter<String>adapter;//listview的适配器
     private List<String>datalist=new ArrayList<>();//存放省，县，市的数据列表

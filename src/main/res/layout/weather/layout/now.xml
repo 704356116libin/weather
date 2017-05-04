@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    android:id="@+id/weater_now_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:background="#8000">
+<TextView
+    android:id="@+id/weather_now_tp_text"
+    android:gravity="right|bottom"
+    android:textColor="#ffffff"
+    android:textSize="60dp"
+    android:hint="35°"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="20dp"
+    android:layout_alignParentRight="true"
+    app:layout_widthPercent="25%"
+    app:layout_heightPercent="30%"
+   />
+    <TextView
+        android:id="@+id/weather_now_status"
+        android:layout_below="@+id/weather_now_tp_text"
+        android:layout_alignRight="@+id/weather_now_tp_text"
+        android:hint="微风/晴"
+        android:textSize="15dp"
+        android:gravity="bottom|right"
+        app:layout_widthPercent="15%"
+        app:layout_heightPercent="10%"/>
+</android.support.percent.PercentRelativeLayout>
