@@ -24,6 +24,7 @@ android {
         main {
             res.srcDirs =
                     [
+                            'src/main/res/layout/activity',
                             'src/main/res/layout/weather',
                             'src/main/res/layout/fragment',
                             'src/main/res/layout/main',

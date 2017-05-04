@@ -3,44 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-<TextView
-    android:text="空气状况："
-    android:gravity="center_vertical"
-    android:textSize="20dp"
-    android:layout_width="match_parent"
-    android:layout_height="25dp" />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
-        <ImageView
-            android:id="@+id/weather_suggestion_air_img"
-            android:layout_alignParentLeft="true"
-            android:src="@drawable/w100"
-            android:layout_width="60dp"
-            android:layout_height="60dp" />
-        <TextView
-            android:hint="中"
-            android:textSize="20dp"
-            android:gravity="center_vertical"
-            android:id="@+id/weather_suggestion_air_brf_text"
-            android:layout_toRightOf="@+id/weather_suggestion_air_img"
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
-        <TextView
-            android:id="@+id/weather_suggestion_air_txt_text"
-            android:layout_below="@+id/weather_suggestion_air_brf_text"
-            android:layout_toRightOf="@+id/weather_suggestion_air_img"
-            android:gravity="center_vertical"
-            android:textSize="13dp"
-            android:hint="气象条件对空气污染物稀释、扩散和清除无明显影响，易感人群应适当减少室外活动时间。"
-            android:layout_width="match_parent"
-            android:layout_height="40dp" />
-    </RelativeLayout>
-    <View
-        android:layout_marginLeft="60dp"
-        android:background="#6699cc"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"/>
     <TextView
         android:text="体感舒适："
         android:gravity="center_vertical"
