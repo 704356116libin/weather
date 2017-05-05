@@ -87,7 +87,7 @@
         android:layout_height="20dp" />
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="40dp">
         <ImageView
             android:id="@+id/weather_suggestion_flu_img"
             android:layout_alignParentLeft="true"
@@ -124,11 +124,7 @@
         android:layout_width="match_parent"
         android:layout_height="20dp" />
 
-    <View
-        android:layout_marginLeft="40dp"
-        android:background="#6699cc"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -160,4 +156,9 @@
             android:hint="气象条件对空气污染物稀释、扩散和清除无明显影响，易感人群应适当减少室外活动时间。"
             android:textSize="10dp" />
     </RelativeLayout>
+    <View
+        android:layout_marginLeft="40dp"
+        android:background="#6699cc"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"/>
 </LinearLayout>
