@@ -1,5 +1,6 @@
 package com.example.weather.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.weather.R;
+import com.example.weather.activity.WeatherMainActivity;
 import com.example.weather.db.City;
 import com.example.weather.db.County;
 import com.example.weather.db.Province;
@@ -42,9 +44,12 @@ public class LoadLocationFragment extends Fragment{
 
     private Province selectProvince;//选择的省份
     private City selectCity;//所选择的城市
+    private County selectCounty;//选择的县市
+
     private List<Province>province;//存放省份信息的列表
     private List<City>city;//存放地级市信息的列表
     private List<County>county;//存放地级市下的县，市信息的列表
+
     private Button back_but;
     private TextView title_text;
     private ListView listView;//显示位置信息的ListView
@@ -98,13 +103,21 @@ public class LoadLocationFragment extends Fragment{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(current_level==LEVEL_PROVINCE){
                     selectProvince=province.get(position);//拿到所选省份的代码
-                    Log.i("selectProvinceId:",selectProvince.getProvinceName()+"");
+                    Log.i("Fragment:",position+"");
                     LoadCitys();//读取省份下的地级市的数据
                 }
                 if (current_level==LEVEL_CITY){
-                   selectCity=city.get(position);
+                    selectCity=city.get(position);
                     Log.i("selectCityId:",selectCity.getCityName()+"");
+                    Log.i("Fragment:",position+"");
                     LoadCountys();
+                }
+                if(current_level==LEVEL_COUNTY){
+                    Log.i("Fragment:",position+"");
+                    selectCounty=county.get(position);
+                    //当当前列表选项为县市的数据并且用户选中了其中某一项时，将所选县市weather_id传递给天气活动
+                    String weather_id=selectCounty.getWeather_id();
+                    WeatherMainActivity.actionStartActivity(getContext(),weather_id);
                 }
             }
         });

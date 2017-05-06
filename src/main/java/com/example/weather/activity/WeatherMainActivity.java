@@ -1,7 +1,10 @@
 package com.example.weather.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,10 +35,12 @@ public class WeatherMainActivity extends BaseActivity {
     private ImageView weather_suggestion_sport_img;//显示运动建议的图片
     private  TextView weather_suggestion_sport_brief_text;//显示运动建议的简要描述
     private  TextView weather_suggestion_sport_detail_text;//显示运动建议的详细描述
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weather_main_layout);
+        Log.i("WeatherMainActivity:",getIntent().getStringExtra("weather_id"));
     }
 
     /**
@@ -45,5 +50,10 @@ public class WeatherMainActivity extends BaseActivity {
     public void onBackPressed() {
 
         super.onBackPressed();
+    }
+    public static void  actionStartActivity(Context context,String weather_id){
+        Intent intent=new Intent(context,WeatherMainActivity.class);
+        intent.putExtra("weather_id",weather_id);
+        context.startActivity(intent);
     }
 }
