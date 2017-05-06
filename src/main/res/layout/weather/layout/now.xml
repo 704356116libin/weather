@@ -11,7 +11,7 @@
     android:id="@+id/weather_now_tp_text"
     android:gravity="right|bottom"
     android:textColor="#ffffff"
-    android:textSize="60dp"
+    android:textSize="55dp"
     android:hint="35°"
     android:layout_marginTop="10dp"
     android:layout_marginRight="20dp"

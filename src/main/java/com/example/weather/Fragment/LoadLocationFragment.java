@@ -1,5 +1,6 @@
 package com.example.weather.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -56,6 +57,7 @@ public class LoadLocationFragment extends Fragment{
     private View view;
     private ArrayAdapter<String>adapter;//listview的适配器
     private List<String>datalist=new ArrayList<>();//存放省，县，市的数据列表
+    private ProgressDialog progressDialog;//加载显示进度加载中对话框
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -103,20 +105,21 @@ public class LoadLocationFragment extends Fragment{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(current_level==LEVEL_PROVINCE){
                     selectProvince=province.get(position);//拿到所选省份的代码
-                    Log.i("Fragment:",position+"");
+                    Log.i("此时选择的列表位置:",position+"  "+selectProvince.getProvinceName());
                     LoadCitys();//读取省份下的地级市的数据
                 }
-                if (current_level==LEVEL_CITY){
+                else if (current_level==LEVEL_CITY){
                     selectCity=city.get(position);
-                    Log.i("selectCityId:",selectCity.getCityName()+"");
-                    Log.i("Fragment:",position+"");
+                    Log.i("此时选择城市名字:",selectCity.getCityName()+"");
+                    Log.i("此时选择的列表位置:",position+"");
                     LoadCountys();
                 }
-                if(current_level==LEVEL_COUNTY){
-                    Log.i("Fragment:",position+"");
+                else if(current_level==LEVEL_COUNTY){
                     selectCounty=county.get(position);
+                    Log.i("此时选择的列表位置:",position+"、"+selectCounty.getCountyName());
                     //当当前列表选项为县市的数据并且用户选中了其中某一项时，将所选县市weather_id传递给天气活动
                     String weather_id=selectCounty.getWeather_id();
+                    Log.i("weather_id:",weather_id);
                     WeatherMainActivity.actionStartActivity(getContext(),weather_id);
                 }
             }
@@ -127,15 +130,15 @@ public class LoadLocationFragment extends Fragment{
      */
     public  void LoadProvince(){
         title_text.setText("中国");
-        back_but.setVisibility(View.GONE);
-        province= DataSupport.findAll(Province.class);
+        back_but.setVisibility(View.GONE);//不能按返回按钮
+        province= DataSupport.findAll(Province.class);//先从数据库中寻找有没有省份信息
+        Log.i("province列表大小:",province.size()+"");
         if (province.size()>0) {
             datalist.clear();//清空原有的存储数据
             for (Province province1 : province) {
                 //取出每个省的名字并加入数据源中
                 datalist.add(province1.getProvinceName());
             }
-            Log.i("province:",province.size()+"");
             //通知适配器数据发生改变
             adapter.notifyDataSetChanged();
             //设置默认选中项,默认第一项选中
@@ -154,15 +157,13 @@ public class LoadLocationFragment extends Fragment{
         back_but.setVisibility(View.VISIBLE);
         //查询特定省份下的所有地级市
         city= DataSupport.where("provinceId=?",String.valueOf(selectProvince.getProvinceCode())).find(City.class);
-        Log.i("city:",city.size()+"");
-
+        Log.i("city列表大小:",city.size()+"");
         if (city.size()>0) {
             datalist.clear();
             for (City city1 : city) {
                 //取出每个省的名字并加入数据源中
                 datalist.add(city1.getCityName());
             }
-            Log.i("city:",city.size()+"");
             //通知适配器数据发生改变
             adapter.notifyDataSetChanged();
             //设置默认选中项,默认第一项选中
@@ -177,17 +178,18 @@ public class LoadLocationFragment extends Fragment{
      * 查询县，市数据,优先从数据库中查询，查不到的话，从服务器上查询
      */
     public void LoadCountys(){
-        title_text.setText("中国");
+        title_text.setText(selectCity.getCityName());
         back_but.setVisibility(View.VISIBLE);
         //查询特定地级市下的所有县市
         county= DataSupport.where("cityId=?",String.valueOf(selectCity.getCityCode())).find(County.class);
+        Log.i("county列表大小:",county.size()+"");
         if (county.size()>0) {
             datalist.clear();
             for (County county1 : county) {
                 //取出每个县，市的名字并加入数据源中
+                Log.i("county列表大小:",county1.getCountyName());
                 datalist.add(county1.getCountyName());
             }
-            Log.i("county:",county.size()+"");
             //通知适配器数据发生改变
             adapter.notifyDataSetChanged();
             //设置默认选中项,默认第一项选中
@@ -228,7 +230,6 @@ public class LoadLocationFragment extends Fragment{
                 }else if ("county".equals(type)){
                     result=ParseLocationJson.handleCountyRequest(responseData,selectCity.getCityCode());
                 }
-                Log.i("onResponse:",result+"");
                 if (result){
                     getActivity().runOnUiThread(new Runnable() {
                         @Override

@@ -1,15 +1,18 @@
 package com.example.weather.util;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.example.weather.db.City;
 import com.example.weather.db.County;
 import com.example.weather.db.Province;
+import com.example.weather.json.weather;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**该类用来解析位置数据
  * Created by 彬~ on 2017/5/3.
@@ -82,6 +85,6 @@ public class ParseLocationJson {
             }
         }
         return  false;
-
     }
+
 }
