@@ -8,6 +8,7 @@ package com.example.weather.json;
 public class forecast {
     public cond cond;
     public String date;//拿到预报日期
+    public tmp tmp;
     public class tmp{
         public String max;//最高温度
         public String min;//最低温度

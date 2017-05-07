@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="30dp">
+    <TextView
+        android:id="@+id/aqi_titleText"
+        android:textSize="13dp"
+        android:text="空气质量"
+        android:gravity="center"
+        android:layout_width="60dp"
+        android:layout_height="30dp" />
+    <View
+        android:id="@+id/view1"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/aqi_titleText"
+        android:background="@color/edgeColor"
+        android:layout_width="2dp"
+        android:layout_height="20dp"/>
+    <TextView
+        android:id="@+id/aqi_statusText"
+        android:layout_toRightOf="@+id/view1"
+        android:textSize="10dp"
+        android:gravity="center"
+        android:hint="中毒污染"
+        android:layout_width="55dp"
+        android:layout_height="30dp" />
+    <TextView
+        android:id="@+id/aqi_dataText"
+        android:textSize="8dp"
+        android:gravity="center"
+        android:hint="18:00发布"
+        android:layout_alignParentRight="true"
+        android:layout_width="60dp"
+        android:layout_height="30dp" />
+</RelativeLayout>
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:hint=""
+                android:id="@+id/aqi_aqiText"
+                app:layout_widthPercent="50%"
+                android:layout_height="80dp" />
+            <TextView
+                android:layout_below="@+id/aqi_aqiText"
+                android:layout_alignLeft="@+id/aqi_aqiText"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:textSize="10dp"
+                android:text="空气质量指数"
+                android:gravity="center"/>
+        </android.support.percent.PercentRelativeLayout>
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1">
+
+        </android.support.percent.PercentRelativeLayout>
+    </LinearLayout>
+</LinearLayout>

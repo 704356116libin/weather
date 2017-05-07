@@ -61,15 +61,20 @@ public class LoadLocationFragment extends Fragment{
     private ArrayAdapter<String>adapter;//listview的适配器
     private List<String>datalist=new ArrayList<>();//存放省，县，市的数据列表
     private ProgressDialog progressDialog;//加载显示进度加载中对话框
+    private SharedPreferences selectShare;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         SharedPreferences weatherPrefercnce=getActivity().getSharedPreferences("weather", Context.MODE_PRIVATE);
         String weatherData=weatherPrefercnce.getString("weatherData",null);
-        if (weatherData!=null) {
-            WeatherMainActivity.actionStartActivity(getContext(),"");
+        String id=weatherPrefercnce.getString("weather_id",null);
+         selectShare=getActivity().getSharedPreferences("seclectLocation", Context.MODE_PRIVATE);
+        boolean isSelect=selectShare.getBoolean("isSelect",false);
+        if (weatherData!=null&isSelect==false) {
+            WeatherMainActivity.actionStartActivity(getContext(),id);
             getActivity().finish();
         }
+
         view=inflater.inflate(R.layout.loadlocation_frag_layout,container,false);
         init();
         return view;
@@ -79,7 +84,6 @@ public class LoadLocationFragment extends Fragment{
      * 初始化控件
      */
     private void init() {
-
         back_but= (Button) view.findViewById(R.id.loadLocation_back_but);
         title_text= (TextView) view.findViewById(R.id.loadLocation_text);
         listView= (ListView) view.findViewById(R.id.loadLocation_list);
@@ -130,6 +134,9 @@ public class LoadLocationFragment extends Fragment{
                     String weather_id=selectCounty.getWeather_id();
                     Log.i("weather_id:",weather_id);
                     WeatherMainActivity.actionStartActivity(getContext(),weather_id);
+                    SharedPreferences.Editor editor=selectShare.edit();
+                    editor.putBoolean("isSelect",false);
+                    editor.commit();
                     getActivity().finish();
                 }
             }
@@ -217,12 +224,14 @@ public class LoadLocationFragment extends Fragment{
      * @param type
      */
     private void LoadFromServer(String address, final String type) {
+        ShowDialog();
         HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        CloseDialog();
                         Toast.makeText(getContext(),"加载失败....",Toast.LENGTH_LONG).show();
                     }
                 });
@@ -244,6 +253,7 @@ public class LoadLocationFragment extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            CloseDialog();
                             if("province".equals(type)){
                                 LoadProvince();
                             }if("city".equals(type)){
@@ -256,6 +266,19 @@ public class LoadLocationFragment extends Fragment{
                 }
             }
         });
+    }
+    public void ShowDialog(){
+        if(progressDialog==null){
+            progressDialog=new ProgressDialog(getActivity());
+            progressDialog.setMessage("玩命加载中.....");
+            progressDialog.setCanceledOnTouchOutside(false);
+        }
+        progressDialog.show();
+    }
+    public void CloseDialog(){
+        if (progressDialog!=null){
+            progressDialog.dismiss();
+        }
     }
 
 }

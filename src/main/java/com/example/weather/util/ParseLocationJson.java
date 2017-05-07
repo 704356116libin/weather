@@ -96,15 +96,15 @@ public class ParseLocationJson {
 
         //天气的所有信息都包含在HeWeather5这个大括号里面，得先把HeWeather5内的内容给解析出来
         try {
-            Log.i("11111",response);
+              Log.i("11111",response);
 //            JSONArray weatherInfo=new JSONArray(response);
 //            JSONObject jsonObject=weatherInfo.getJSONObject(0);
 //            String HeWeather5=jsonObject.getString("HeWeather5");
 //            Log.i("handleWeatherRequest",HeWeather5);
-            JSONObject jsonObject=new JSONObject(response);
-            JSONArray jsonArray=jsonObject.getJSONArray("HeWeather5");
-            String HeWeather5=jsonArray.getJSONObject(0).toString();
-            return new Gson().fromJson(HeWeather5, com.example.weather.json.weather.class);//服务器返回的是一个weather对象
+              JSONObject jsonObject=new JSONObject(response);
+              JSONArray jsonArray=jsonObject.getJSONArray("HeWeather5");
+              String HeWeather5=jsonArray.getJSONObject(0).toString();
+              return new Gson().fromJson(HeWeather5, com.example.weather.json.weather.class);//服务器返回的是一个weather对象
         } catch (JSONException e) {
             e.printStackTrace();
         }

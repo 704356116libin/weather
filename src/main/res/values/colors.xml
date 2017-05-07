@@ -5,5 +5,5 @@
     <color name="colorAccent">#4096ff</color>
     <color name="colorViewBack">#8000</color>
     <color name="textColor">#ffffff</color>
-
+    <color name="edgeColor">#FFA6A4A4</color>
 </resources>

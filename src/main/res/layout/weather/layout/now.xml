@@ -5,8 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="#6699cc"
     android:layout_height="250dp"
+    android:background="@color/colorPrimary"
     >
 <TextView
     android:id="@+id/weather_now_tp_text"
@@ -24,10 +24,10 @@
         android:textColor="@color/textColor"
         android:layout_below="@+id/weather_now_tp_text"
         android:layout_alignRight="@+id/weather_now_tp_text"
-        android:textSize="15dp"
+        android:textSize="13dp"
         android:layout_marginRight="15dp"
         android:gravity="center"
-        app:layout_widthPercent="15%"
+        app:layout_widthPercent="20%"
         app:layout_heightPercent="10%"/>
     <LinearLayout
         android:layout_alignParentBottom="true"

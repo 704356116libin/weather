@@ -13,7 +13,7 @@ public class weather {
     public aqi aqi;
     public basic basic;
     @SerializedName("daily_forecast")
-    public List<forecast>forecastList;
+    public List<forecast>daily_forecast;
     public now now;
     public suggestion suggestion;
 }

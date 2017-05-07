@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:layout_marginTop="2dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 <TextView
+    android:layout_marginLeft="3dp"
     android:id="@+id/weather_forecastitem_data"
     android:gravity="center_vertical"
     android:hint="2017-5-4"
-    android:textSize="20dp"
+    android:textSize="15dp"
     android:layout_width="0dp"
     android:layout_height="35dp"
     android:layout_weight="1"/>
@@ -18,20 +21,24 @@
         android:orientation="horizontal"
         android:gravity="center">
         <TextView
+            android:id="@+id/weather_forecastitem_status"
             android:hint="晴"
-            android:textSize="20dp"
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:layout_width="30dp"
             android:layout_height="35dp"
             />
         <ImageView
+            android:id="@+id/weather_forecastitem_status_img"
             android:background="@drawable/w100"
-            android:layout_width="35dp"
-            android:layout_height="35dp" />
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
     </LinearLayout>
     <TextView
+        android:layout_marginRight="3dp"
+        android:id="@+id/weather_forecastitem_tp"
         android:hint="35/23°"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:gravity="right|center_vertical"
         android:layout_width="0dp"
         android:layout_weight="1"

@@ -1,15 +1,19 @@
 package com.example.weather.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -54,6 +58,8 @@ public class WeatherMainActivity extends BaseActivity {
     private  TextView weather_suggestion_sport_brief_text;//显示运动建议的简要描述
     private  TextView weather_suggestion_sport_detail_text;//显示运动建议的详细描述
 
+    private Button selectLocation_but;
+    private Button addWeather_but;
     private  final String KEY="faff2b52a8eb46df9017cf9c3e055842";//申请的和风天气的API key值
     private  String weather_id;//用来接收所选择的城市weather代码
     private  weather weather;//服务器返回的天气对象
@@ -66,8 +72,11 @@ public class WeatherMainActivity extends BaseActivity {
         init();
         SharedPreferences weatherPrefercnce=getSharedPreferences("weather",MODE_PRIVATE);
         String weatherData=weatherPrefercnce.getString("weatherData",null);
-        Log.i("SharedPreferences:",weatherData);
-        if (weatherData==null) {
+        String id=weatherPrefercnce.getString("weather_id",null);
+//        Log.i("SharedPreferences:",weatherData);
+//        Log.i("SharedPreferences:",weather_id+"////"+id);
+        if (weatherData==null||!weather_id.equals(id)) {
+
             HttpUtil.sendOkHttpRequest("https://free-api.heweather.com/v5/weather?city=" + weather_id
                     + "&key=" + KEY, new Callback() {
                 @Override
@@ -82,6 +91,7 @@ public class WeatherMainActivity extends BaseActivity {
                     SharedPreferences weatherPrefercnce=getSharedPreferences("weather",MODE_PRIVATE);
                     SharedPreferences.Editor editor=weatherPrefercnce.edit();
                     editor.putString("weatherData",data);
+                    editor.putString("weather_id",weather_id);
                     editor.commit();
                     runOnUiThread(new Runnable() {
                         @Override
@@ -97,13 +107,14 @@ public class WeatherMainActivity extends BaseActivity {
             weather = ParseLocationJson.handleWeatherRequest(weatherData);
             ShowInforOnUi();
         }
-        Log.i("WeatherMainActivity:",getIntent().getStringExtra("weather_id"));
     }
 
     /**
      * 初始化各种控件
      */
     private void init() {
+        selectLocation_but= (Button) findViewById(R.id.seclect_location_but);
+        addWeather_but= (Button) findViewById(R.id.add_weather_but);
         weather_now_temperature_text= (TextView) findViewById(R.id.weather_now_tp_text);//显示现在温度文本
         weather_now_status_text= (TextView) findViewById(R.id.weather_now_status);//显示现在天气状态(风力/天气状况)
         weather_now_windDirection_text= (TextView) findViewById(R.id.weather_now_windDirection_text);
@@ -111,8 +122,7 @@ public class WeatherMainActivity extends BaseActivity {
         weather_now_humidity_text= (TextView) findViewById(R.id.weather_now_hum_text);
         weather_now_feelsendibleTemperature_text= (TextView) findViewById(R.id.weather_now_fl_text);
         //显示未来三天天气预报的列表
-        LinearLayoutManager manager=new LinearLayoutManager(WeatherMainActivity.this);
-        ForecastRecycleAdapter adapter=new ForecastRecycleAdapter(list);
+
         weather_forecast_list= (RecyclerView) findViewById(R.id.weather_forecast_list);
         //显示建议信息的图片
         weather_suggestion_comfortable_img= (ImageView) findViewById(R.id.weather_suggestion_comf_img);
@@ -128,15 +138,49 @@ public class WeatherMainActivity extends BaseActivity {
         weather_suggestion_flu_detail_text= (TextView) findViewById(R.id.weather_suggestion_flu_txt_text);
         weather_suggestion_sport_brief_text= (TextView) findViewById(R.id.weather_suggestion_sport_brf_text);
         weather_suggestion_sport_detail_text= (TextView) findViewById(R.id.weather_suggestion_sport_txt_text);
-//        list=weather.forecastList;
-//        Log.i("11111",list.size()+"");
+        RegisterListener();
     }
+
+    /**
+     * 控件监听的处理
+     */
+    private void RegisterListener() {
+        selectLocation_but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences selectShare=WeatherMainActivity.this.getSharedPreferences("seclectLocation", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=selectShare.edit();
+                editor.putBoolean("isSelect",true);
+                editor.commit();
+                Intent intent=new Intent(WeatherMainActivity.this,Weather.class);
+                WeatherMainActivity.this.startActivity(intent);
+                finish();
+            }
+        });
+    }
+
     /**
      * Back按键的逻辑处理
      */
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        AlertDialog.Builder dialog=new AlertDialog.Builder(WeatherMainActivity.this);
+        dialog.setTitle("亲爱的用户，您好：");
+        dialog.setMessage("您确定要退出程序吗?");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        dialog.show();
     }
 
     /**
@@ -154,7 +198,7 @@ public class WeatherMainActivity extends BaseActivity {
 
     private void ShowInforOnUi() {
         weather_now_temperature_text.setText(weather.now.tmp+"°");//设置当前温度
-        weather_now_status_text.setText(weather.now.cond.txt);//显示现在天气状态(风力/天气状况)
+        weather_now_status_text.setText(weather.basic.city+"/"+weather.now.cond.txt);//显示现在天气状态(风力/天气状况)
         weather_now_windDirection_text.setText(weather.now.wind.dir);//显示现在风向
         weather_now_windLevel_text.setText(weather.now.wind.sc);//显示现在风力
         weather_now_humidity_text.setText(weather.now.hum+"%");//显示现在相对湿度
@@ -168,7 +212,14 @@ public class WeatherMainActivity extends BaseActivity {
         weather_suggestion_sport_brief_text.setText(weather.suggestion.sport.brf);
         weather_suggestion_sport_detail_text.setText(weather.suggestion.sport.txt);
         //添加未来三天天气预报的信息
+        list=weather.daily_forecast;
+        LinearLayoutManager manager=new LinearLayoutManager(WeatherMainActivity.this);
+        ForecastRecycleAdapter adapter=new ForecastRecycleAdapter(list);
+        weather_forecast_list.setLayoutManager(manager);
+        weather_forecast_list.setAdapter(adapter);
+        Log.i("daily_forecast:",list.size()+"");
     }
+
     class ForecastRecycleAdapter extends RecyclerView.Adapter<ForecastRecycleAdapter.ViewHolder>{
         List<forecast>list;
 
@@ -178,24 +229,38 @@ public class WeatherMainActivity extends BaseActivity {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return null;
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.forecast_item,parent,false);
+            ViewHolder holder=new ViewHolder(view);
+            return holder;
         }
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-
+            forecast forecast=list.get(position);
+            holder.data.setText(forecast.date);
+            holder.status_img.setImageResource(R.drawable.w100);
+            holder.status.setText(forecast.cond.txt_d);
+            holder.tp.setText(forecast.tmp.max+"/"+forecast.tmp.min+"°");
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return list.size();
         }
 
         class ViewHolder extends RecyclerView.ViewHolder{
-
+            TextView data;//显示预报日期
+            TextView status;//显示天气状况（白天）
+            TextView tp;//显示最高温最低温
+            ImageView status_img;
             public ViewHolder(View itemView) {
                 super(itemView);
+                data= (TextView) itemView.findViewById(R.id.weather_forecastitem_data);
+                status=(TextView) itemView.findViewById(R.id.weather_forecastitem_status);
+                tp=(TextView) itemView.findViewById(R.id.weather_forecastitem_tp);
+                status_img= (ImageView) itemView.findViewById(R.id.weather_forecastitem_status_img);
             }
         }
     }
+
 }
