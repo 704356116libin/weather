@@ -5,27 +5,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="#6699cc"
     android:layout_height="250dp"
-    android:background="#8000">
+    >
 <TextView
     android:id="@+id/weather_now_tp_text"
     android:gravity="right|bottom"
     android:textColor="#ffffff"
+    android:text="18°"
     android:textSize="55dp"
-    android:hint="35°"
     android:layout_marginTop="10dp"
-    android:layout_marginRight="20dp"
     android:layout_alignParentRight="true"
-    app:layout_widthPercent="25%"
+    android:layout_width="wrap_content"
     app:layout_heightPercent="30%"
    />
     <TextView
         android:id="@+id/weather_now_status"
+        android:textColor="@color/textColor"
         android:layout_below="@+id/weather_now_tp_text"
         android:layout_alignRight="@+id/weather_now_tp_text"
-        android:hint="微风/晴"
         android:textSize="15dp"
-        android:gravity="bottom|right"
+        android:layout_marginRight="15dp"
+        android:gravity="center"
         app:layout_widthPercent="15%"
         app:layout_heightPercent="10%"/>
     <LinearLayout
@@ -38,6 +39,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
             <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/weather_now_windDirection_text"
                 android:gravity="center"
                 android:hint="北风"
@@ -46,6 +48,7 @@
                 android:layout_width="match_parent"
                 app:layout_heightPercent="40%"/>
             <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/weather_now_windLever_text"
                 android:gravity="center|top"
                 android:hint="3级"
@@ -55,6 +58,8 @@
                 app:layout_heightPercent="60%"/>
         </android.support.percent.PercentRelativeLayout>
         <View
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
             android:layout_width="3dp"
             android:layout_height="match_parent"
             android:background="#ffffff"/>
@@ -63,6 +68,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
             <TextView
+                android:textColor="@color/textColor"
+
                 android:gravity="center"
                 android:text="相对湿度"
                 android:textSize="13dp"
@@ -70,6 +77,7 @@
                 android:layout_width="match_parent"
                 app:layout_heightPercent="40%"/>
             <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/weather_now_hum_text"
                 android:gravity="center|top"
                 android:hint="15%"
@@ -79,6 +87,8 @@
                 app:layout_heightPercent="60%"/>
         </android.support.percent.PercentRelativeLayout>
         <View
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
             android:layout_width="3dp"
             android:layout_height="match_parent"
             android:background="#ffffff"/>
@@ -87,6 +97,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
             <TextView
+                android:textColor="@color/textColor"
                 android:gravity="center"
                 android:text="体感温度"
                 android:textSize="13dp"
@@ -94,6 +105,7 @@
                 android:layout_width="match_parent"
                 app:layout_heightPercent="40%"/>
             <TextView
+                android:textColor="@color/textColor"
                 android:id="@+id/weather_now_fl_text"
                 android:gravity="center|top"
                 android:hint="23°"

@@ -1,6 +1,7 @@
 package com.example.weather.util;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.weather.db.City;
 import com.example.weather.db.County;
@@ -85,6 +86,29 @@ public class ParseLocationJson {
             }
         }
         return  false;
+    }
+    /**
+     * 用来处理服务器短返回的天气JSON信息
+     * @param response
+     * @return
+     */
+    public  static weather handleWeatherRequest(String response){
+
+        //天气的所有信息都包含在HeWeather5这个大括号里面，得先把HeWeather5内的内容给解析出来
+        try {
+            Log.i("11111",response);
+//            JSONArray weatherInfo=new JSONArray(response);
+//            JSONObject jsonObject=weatherInfo.getJSONObject(0);
+//            String HeWeather5=jsonObject.getString("HeWeather5");
+//            Log.i("handleWeatherRequest",HeWeather5);
+            JSONObject jsonObject=new JSONObject(response);
+            JSONArray jsonArray=jsonObject.getJSONArray("HeWeather5");
+            String HeWeather5=jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(HeWeather5, com.example.weather.json.weather.class);//服务器返回的是一个weather对象
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

@@ -1,7 +1,9 @@
 package com.example.weather.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.weather.R;
+import com.example.weather.activity.Weather;
 import com.example.weather.activity.WeatherMainActivity;
 import com.example.weather.db.City;
 import com.example.weather.db.County;
@@ -61,6 +64,12 @@ public class LoadLocationFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        SharedPreferences weatherPrefercnce=getActivity().getSharedPreferences("weather", Context.MODE_PRIVATE);
+        String weatherData=weatherPrefercnce.getString("weatherData",null);
+        if (weatherData!=null) {
+            WeatherMainActivity.actionStartActivity(getContext(),"");
+            getActivity().finish();
+        }
         view=inflater.inflate(R.layout.loadlocation_frag_layout,container,false);
         init();
         return view;
@@ -121,6 +130,7 @@ public class LoadLocationFragment extends Fragment{
                     String weather_id=selectCounty.getWeather_id();
                     Log.i("weather_id:",weather_id);
                     WeatherMainActivity.actionStartActivity(getContext(),weather_id);
+                    getActivity().finish();
                 }
             }
         });
