@@ -10,6 +10,7 @@ import java.util.List;
  */
 
 public class weather {
+    public String status;
     public aqi aqi;
     public basic basic;
     @SerializedName("daily_forecast")

@@ -30,6 +30,7 @@ import com.example.weather.Base.BaseActivity;
 import com.example.weather.R;
 import com.example.weather.json.forecast;
 import com.example.weather.json.weather;
+import com.example.weather.service.AutoUpdataWeather;
 import com.example.weather.util.HttpUtil;
 import com.example.weather.util.ParseLocationJson;
 import com.google.gson.Gson;
@@ -253,6 +254,8 @@ public class WeatherMainActivity extends BaseActivity {
 
 
     private void ShowInforOnUi() {
+        Intent intent=new Intent(this, AutoUpdataWeather.class);
+        startService(intent);
         if (weather.aqi==null){
             aqi_layout.setVisibility(View.GONE);
         }else{
