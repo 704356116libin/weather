@@ -6,7 +6,11 @@ package com.example.weather.json;
  */
 
 public class aqi {
-    public String aqi;
-    public String pm25;
-    public String qlty;
+
+    public city city;
+    public class city{
+        public String aqi;
+        public String pm25;
+        public String qlty;
+    }
 }

@@ -6,8 +6,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="250dp"
-    android:background="@color/colorPrimary"
+    android:background="#8000"
     >
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/weather_bgImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
 <TextView
     android:id="@+id/weather_now_tp_text"
     android:gravity="right|bottom"
@@ -58,9 +67,9 @@
                 app:layout_heightPercent="60%"/>
         </android.support.percent.PercentRelativeLayout>
         <View
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="7dp"
-            android:layout_width="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="#ffffff"/>
         <android.support.percent.PercentRelativeLayout
@@ -87,9 +96,9 @@
                 app:layout_heightPercent="60%"/>
         </android.support.percent.PercentRelativeLayout>
         <View
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="7dp"
-            android:layout_width="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="#ffffff"/>
         <android.support.percent.PercentRelativeLayout
@@ -116,4 +125,5 @@
         </android.support.percent.PercentRelativeLayout>
 
     </LinearLayout>
+    </android.support.percent.PercentRelativeLayout>
 </android.support.percent.PercentRelativeLayout>

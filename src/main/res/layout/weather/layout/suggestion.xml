@@ -87,7 +87,7 @@
         android:layout_height="2dp"/>
     <TextView
         android:layout_marginLeft="2dp"
-        android:text="温馨提示："
+        android:text="感冒预防："
         android:gravity="center_vertical"
         android:textSize="13dp"
         android:layout_width="match_parent"

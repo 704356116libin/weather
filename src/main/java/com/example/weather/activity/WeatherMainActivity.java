@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,10 +20,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.weather.Base.BaseActivity;
 import com.example.weather.R;
 import com.example.weather.json.forecast;
@@ -61,8 +66,17 @@ public class WeatherMainActivity extends BaseActivity {
     private TextView weather_suggestion_sport_brief_text;//显示运动建议的简要描述
     private TextView weather_suggestion_sport_detail_text;//显示运动建议的详细描述
     private ProgressDialog progressDialog;//加载显示进度加载中对话框
-
+    //===================================================================
+    private ImageView weather_bgImg;//加载必应每日一图
+    //============aqi的特别处理，有的城市有aqi，有的没有=================
+    private LinearLayout aqi_layout;//显示aqi的父布局
+    private TextView aqi_statusText;//显示空气污染情况的文本
+    private TextView aqi_dataText;//显示空气指数发布的时间
+    private TextView aqi_aqiText;//显示sqi指数的文本
+    private TextView aqi_pm25Text;//显示PM2.5的文本
+    //===================================================================
     private Button selectLocation_but;
+    private FloatingActionButton SeclectLocation;
     private Button addWeather_but;
     private final String KEY = "faff2b52a8eb46df9017cf9c3e055842";//申请的和风天气的API key值
     private String weather_id;//用来接收所选择的城市weather代码
@@ -73,6 +87,13 @@ public class WeatherMainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weather_main_layout);
+        //==========================================
+        if(Build.VERSION.SDK_INT>=21){
+            View decorView=getWindow().getDecorView();
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN|
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
         weather_id = getIntent().getStringExtra("weather_id");//取得从选择城市页面传递过来的所选城市代码
         init();
         SharedPreferences weatherPrefercnce = getSharedPreferences("weather", MODE_PRIVATE);
@@ -124,19 +145,25 @@ public class WeatherMainActivity extends BaseActivity {
      * 初始化各种控件
      */
     private void init() {
-        selectLocation_but = (Button) findViewById(R.id.seclect_location_but);//选择城市
+        //悬浮按钮
+        SeclectLocation= (FloatingActionButton) findViewById(R.id.Seclect_location_but);
+        //下拉刷新布局
         weatherRefersh= (SwipeRefreshLayout) findViewById(R.id.weather_refersh);
+        //设置下拉刷新按钮的颜色
         weatherRefersh.setColorSchemeResources(R.color.refershColor);
-        addWeather_but = (Button) findViewById(R.id.add_weather_but);
+        //必应每日一图的显示
+        weather_bgImg= (ImageView) findViewById(R.id.weather_bgImg);
+        //各种天气信息的显示
         weather_now_temperature_text = (TextView) findViewById(R.id.weather_now_tp_text);//显示现在温度文本
         weather_now_status_text = (TextView) findViewById(R.id.weather_now_status);//显示现在天气状态(风力/天气状况)
         weather_now_windDirection_text = (TextView) findViewById(R.id.weather_now_windDirection_text);
         weather_now_windLevel_text = (TextView) findViewById(R.id.weather_now_windLever_text);
         weather_now_humidity_text = (TextView) findViewById(R.id.weather_now_hum_text);
         weather_now_feelsendibleTemperature_text = (TextView) findViewById(R.id.weather_now_fl_text);
-        //显示未来三天天气预报的列表
 
+        //显示未来三天天气预报的列表
         weather_forecast_list = (RecyclerView) findViewById(R.id.weather_forecast_list);
+
         //显示建议信息的图片
         weather_suggestion_comfortable_img = (ImageView) findViewById(R.id.weather_suggestion_comf_img);
         weather_suggestion_dress_img = (ImageView) findViewById(R.id.weather_suggestion_drsg_img);
@@ -151,6 +178,12 @@ public class WeatherMainActivity extends BaseActivity {
         weather_suggestion_flu_detail_text = (TextView) findViewById(R.id.weather_suggestion_flu_txt_text);
         weather_suggestion_sport_brief_text = (TextView) findViewById(R.id.weather_suggestion_sport_brf_text);
         weather_suggestion_sport_detail_text = (TextView) findViewById(R.id.weather_suggestion_sport_txt_text);
+        //空气指数aqi的控件绑定
+        aqi_layout= (LinearLayout) findViewById(R.id.aqi_layout);
+        aqi_statusText= (TextView) findViewById(R.id.aqi_statusText);
+        aqi_dataText= (TextView) findViewById(R.id.aqi_dataText);
+        aqi_aqiText= (TextView) findViewById(R.id.aqi_aqiText);
+        aqi_pm25Text= (TextView) findViewById(R.id.aqi_pm25Text);
         RegisterListener();
     }
 
@@ -158,8 +191,8 @@ public class WeatherMainActivity extends BaseActivity {
      * 控件监听的处理
      */
     private void RegisterListener() {
-        //监听选择城市的按钮，并存储一个标识量isSeclect来表明是在天气界面跳到选择城市界面的
-        selectLocation_but.setOnClickListener(new View.OnClickListener() {
+        //悬浮按钮的监听
+        SeclectLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences selectShare = WeatherMainActivity.this.getSharedPreferences("seclectLocation", Context.MODE_PRIVATE);
@@ -220,6 +253,25 @@ public class WeatherMainActivity extends BaseActivity {
 
 
     private void ShowInforOnUi() {
+        if (weather.aqi==null){
+            aqi_layout.setVisibility(View.GONE);
+        }else{
+            aqi_layout.setVisibility(View.VISIBLE);
+            aqi_statusText.setText(weather.aqi.city.qlty);
+            aqi_aqiText.setText(weather.aqi.city.aqi);
+            aqi_pm25Text.setText(weather.aqi.city.pm25);
+            String data=weather.basic.update.loc;
+            String str[]=data.split(" ",2);//以空格将服务器更新日期截取为两段
+            aqi_dataText.setText(str[1]);
+        }
+        //加载必应每日一图
+        SharedPreferences bingImgShare=getSharedPreferences("bingImg",MODE_PRIVATE);
+        String bingImg=bingImgShare.getString("bingImg",null);
+        if (bingImg==null){
+            LoadBiYingImg();
+        }else {
+            Glide.with(WeatherMainActivity.this).load(bingImg).into(weather_bgImg);
+        }
         weather_now_temperature_text.setText(weather.now.tmp + "°");//设置当前温度
         weather_now_status_text.setText(weather.basic.city + "/" + weather.now.cond.txt);//显示现在天气状态(风力/天气状况)
         weather_now_windDirection_text.setText(weather.now.wind.dir);//显示现在风向
@@ -287,6 +339,34 @@ public class WeatherMainActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 加载必应每日一图
+     */
+    public void LoadBiYingImg(){
+        String imagUrl="http://guolin.tech/api/bing_pic";
+        HttpUtil.sendOkHttpRequest(imagUrl, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String bingImg=response.body().string();//拿到图片的url
+                SharedPreferences bingImgShare=getSharedPreferences("bingImg",MODE_PRIVATE);
+                SharedPreferences.Editor editor=bingImgShare.edit();
+                editor.putString("bingImg",bingImg);
+                editor.apply();
+                //更新图片
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Glide.with(WeatherMainActivity.this).load(bingImg).into(weather_bgImg);
+                    }
+                });
+            }
+        });
+    }
     public void ShowDialog() {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(WeatherMainActivity.this);

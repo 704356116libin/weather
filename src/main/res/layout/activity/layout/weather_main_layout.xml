@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/Seclect_location_but"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/location"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_gravity="bottom|right"
+        />
+
     <android.support.v4.widget.SwipeRefreshLayout
+        android:fitsSystemWindows="true"
         android:id="@+id/weather_refersh"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         >
     <ScrollView
+        android:fitsSystemWindows="true"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -26,39 +37,16 @@
                 android:layout_height="5dp"/>
             <include layout="@layout/forecast"/>
             <View
-                android:background="#8000"
+                android:background="@color/colorViewBack"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"/>
+            <include layout="@layout/aqi"/>
+            <View
+                android:background="@color/colorViewBack"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"/>
             <include layout="@layout/suggestion"/>
         </LinearLayout>
     </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
-    <LinearLayout
-        android:background="#ffffff"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="vertical">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/edgeColor"/>
-            android:background="@color/edgeColor"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <Button
-                android:id="@+id/seclect_location_but"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/location"
-                android:layout_width="35dp"
-                android:layout_height="35dp" />
-            <Button
-                android:id="@+id/add_weather_but"
-                android:background="@drawable/addlocation"
-                android:layout_marginRight="10dp"
-                android:layout_alignParentRight="true"
-                android:layout_width="35dp"
-                android:layout_height="35dp" />
-        </RelativeLayout>
-    </LinearLayout>
-</LinearLayout>
+</FrameLayout>
