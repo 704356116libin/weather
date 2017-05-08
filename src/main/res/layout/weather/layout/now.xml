@@ -1,129 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.percent.PercentRelativeLayout
-    android:id="@+id/weater_now_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:id="@+id/weater_now_layout"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
-    android:background="#8000"
-    >
+    android:layout_height="350dp"
+    android:background="#1C978B8B"
+    android:orientation="vertical">
 
     <android.support.percent.PercentRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/weather_bgImg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
-<TextView
-    android:id="@+id/weather_now_tp_text"
-    android:gravity="right|bottom"
-    android:textColor="#ffffff"
-    android:text="18°"
-    android:textSize="55dp"
-    android:layout_marginTop="10dp"
-    android:layout_alignParentRight="true"
-    android:layout_width="wrap_content"
-    app:layout_heightPercent="30%"
-   />
-    <TextView
-        android:id="@+id/weather_now_status"
-        android:textColor="@color/textColor"
-        android:layout_below="@+id/weather_now_tp_text"
-        android:layout_alignRight="@+id/weather_now_tp_text"
-        android:textSize="13dp"
-        android:layout_marginRight="15dp"
-        android:gravity="center"
-        app:layout_widthPercent="20%"
-        app:layout_heightPercent="10%"/>
-    <LinearLayout
-        android:layout_alignParentBottom="true"
-        app:layout_widthPercent="100%"
-        app:layout_heightPercent="25%"
-        android:orientation="horizontal">
-        <android.support.percent.PercentRelativeLayout
-            android:layout_width="0dp"
+        <ImageView
+            android:id="@+id/weather_bgImg"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
-            <TextView
-                android:textColor="@color/textColor"
-                android:id="@+id/weather_now_windDirection_text"
-                android:gravity="center"
-                android:hint="北风"
-                android:textSize="13dp"
-                android:layout_alignParentTop="true"
-                android:layout_width="match_parent"
-                app:layout_heightPercent="40%"/>
-            <TextView
-                android:textColor="@color/textColor"
-                android:id="@+id/weather_now_windLever_text"
-                android:gravity="center|top"
-                android:hint="3级"
-                android:textSize="25dp"
-                android:layout_alignParentBottom="true"
-                android:layout_width="match_parent"
-                app:layout_heightPercent="60%"/>
-        </android.support.percent.PercentRelativeLayout>
-        <View
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#ffffff"/>
-        <android.support.percent.PercentRelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-            <TextView
-                android:textColor="@color/textColor"
+            android:scaleType="centerCrop" />
 
-                android:gravity="center"
-                android:text="相对湿度"
-                android:textSize="13dp"
-                android:layout_alignParentTop="true"
-                android:layout_width="match_parent"
-                app:layout_heightPercent="40%"/>
-            <TextView
-                android:textColor="@color/textColor"
-                android:id="@+id/weather_now_hum_text"
-                android:gravity="center|top"
-                android:hint="15%"
-                android:textSize="25dp"
-                android:layout_alignParentBottom="true"
-                android:layout_width="match_parent"
-                app:layout_heightPercent="60%"/>
-        </android.support.percent.PercentRelativeLayout>
-        <View
+        <TextView
+            android:id="@+id/weather_now_tp_text"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#ffffff"/>
-        <android.support.percent.PercentRelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-            <TextView
-                android:textColor="@color/textColor"
-                android:gravity="center"
-                android:text="体感温度"
-                android:textSize="13dp"
-                android:layout_alignParentTop="true"
-                android:layout_width="match_parent"
-                app:layout_heightPercent="40%"/>
-            <TextView
-                android:textColor="@color/textColor"
-                android:id="@+id/weather_now_fl_text"
-                android:gravity="center|top"
-                android:hint="23°"
-                android:textSize="25dp"
-                android:layout_alignParentBottom="true"
-                android:layout_width="match_parent"
-                app:layout_heightPercent="60%"/>
-        </android.support.percent.PercentRelativeLayout>
+            android:gravity="right|bottom"
+            android:text="18°"
+            android:textColor="#ffffff"
+            android:textSize="55dp"
+            app:layout_heightPercent="30%" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/weather_now_status"
+            android:layout_alignRight="@+id/weather_now_tp_text"
+            android:layout_below="@+id/weather_now_tp_text"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:textColor="@color/textColor"
+            android:textSize="13dp"
+            app:layout_heightPercent="10%"
+            app:layout_widthPercent="20%" />
+
+        <LinearLayout
+            android:layout_height="75dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            app:layout_widthPercent="100%">
+
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/weather_now_windDirection_text"
+                    android:layout_width="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:hint="北风"
+                    android:textColor="@color/textColor"
+                    android:textSize="13dp"
+                    app:layout_heightPercent="40%" />
+
+                <TextView
+                    android:id="@+id/weather_now_windLever_text"
+                    android:layout_width="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center|top"
+                    android:hint="3级"
+                    android:textColor="@color/textColor"
+                    android:textSize="25dp"
+                    app:layout_heightPercent="60%" />
+            </android.support.percent.PercentRelativeLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff" />
+
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:text="相对湿度"
+                    android:textColor="@color/textColor"
+                    android:textSize="13dp"
+                    app:layout_heightPercent="40%" />
+
+                <TextView
+                    android:id="@+id/weather_now_hum_text"
+                    android:layout_width="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center|top"
+                    android:hint="15%"
+                    android:textColor="@color/textColor"
+                    android:textSize="25dp"
+                    app:layout_heightPercent="60%" />
+            </android.support.percent.PercentRelativeLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff" />
+
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center"
+                    android:text="体感温度"
+                    android:textColor="@color/textColor"
+                    android:textSize="13dp"
+                    app:layout_heightPercent="40%" />
+
+                <TextView
+                    android:id="@+id/weather_now_fl_text"
+                    android:layout_width="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center|top"
+                    android:hint="23°"
+                    android:textColor="@color/textColor"
+                    android:textSize="25dp"
+                    app:layout_heightPercent="60%" />
+            </android.support.percent.PercentRelativeLayout>
+
+        </LinearLayout>
     </android.support.percent.PercentRelativeLayout>
 </android.support.percent.PercentRelativeLayout>

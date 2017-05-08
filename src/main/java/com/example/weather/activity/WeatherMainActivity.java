@@ -88,12 +88,12 @@ public class WeatherMainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weather_main_layout);
         //==========================================
-        if(Build.VERSION.SDK_INT>=21){
-            View decorView=getWindow().getDecorView();
-            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN|
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
+//        if(Build.VERSION.SDK_INT>=21){
+//            View decorView=getWindow().getDecorView();
+//            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN|
+//            View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+//            getWindow().setStatusBarColor(Color.TRANSPARENT);
+//        }
         weather_id = getIntent().getStringExtra("weather_id");//取得从选择城市页面传递过来的所选城市代码
         init();
         SharedPreferences weatherPrefercnce = getSharedPreferences("weather", MODE_PRIVATE);
