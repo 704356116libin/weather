@@ -44,6 +44,7 @@ public class Weather extends BaseActivity {
             super.onBackPressed();
         }else {
             WeatherMainActivity.actionStartActivity(Weather.this, id);
+            finish();
         }
     }
 }
