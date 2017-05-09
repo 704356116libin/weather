@@ -287,14 +287,14 @@ public class WeatherMainActivity extends BaseActivity {
             String str[]=data.split(" ",2);//以空格将服务器更新日期截取为两段
             aqi_dataText.setText(str[1]);
         }
-        //加载必应每日一图
-        SharedPreferences bingImgShare=getSharedPreferences("bingImg",MODE_PRIVATE);
-        String bingImg=bingImgShare.getString("bingImg",null);
-        if (bingImg==null){
-            LoadBiYingImg();
-        }else {
-            Glide.with(WeatherMainActivity.this).load(bingImg).into(weather_bgImg);
-        }
+//        //加载必应每日一图
+//        SharedPreferences bingImgShare=getSharedPreferences("bingImg",MODE_PRIVATE);
+//        String bingImg=bingImgShare.getString("bingImg",null);
+//        if (bingImg==null){
+//            LoadBiYingImg();
+//        }else {
+//            Glide.with(WeatherMainActivity.this).load(bingImg).into(weather_bgImg);
+//        }
         weather_now_temperature_text.setText(weather.now.tmp + "°");//设置当前温度
         weather_now_status_text.setText(weather.basic.city + "/" + weather.now.cond.txt);//显示现在天气状态(风力/天气状况)
         weather_now_windDirection_text.setText(weather.now.wind.dir);//显示现在风向
