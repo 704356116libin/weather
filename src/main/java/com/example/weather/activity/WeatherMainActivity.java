@@ -76,18 +76,40 @@ public class WeatherMainActivity extends BaseActivity {
     private TextView aqi_aqiText;//显示sqi指数的文本
     private TextView aqi_pm25Text;//显示PM2.5的文本
     //===================================================================
-    private Button selectLocation_but;
     private FloatingActionButton SeclectLocation;
-    private Button addWeather_but;
     private final String KEY = "faff2b52a8eb46df9017cf9c3e055842";//申请的和风天气的API key值
     private String weather_id;//用来接收所选择的城市weather代码
     private weather weather;//服务器返回的天气对象
     private List<forecast> list;//用来存储三天的预报信息
     private SwipeRefreshLayout weatherRefersh;//下拉刷新天气
+    //=============================================================
+    //对应天气的代码
+    final String weather_img_code[]={"100","101","102","103","104",
+                                     "200","201","202", "203","204","205","206","207","208","209",
+                                     "210","211","212","213",
+                                     "300","301","302","303","304","305","306","307","308","309",
+                                     "310","311","312","313",
+                                     "400","401","402","403","404","405","406","407",
+                                     "500","501","502","503","504","507","508",
+                                     "900","901","999"};
+    //对应天气代码的图片id
+    final int weatherImgId[]={R.drawable.w100,R.drawable.w101,R.drawable.w102,R.drawable.w103,R.drawable.w104,
+                            R.drawable.w200,R.drawable.w201,R.drawable.w202,R.drawable.w203,R.drawable.w204,
+                            R.drawable.w205,R.drawable.w206,R.drawable.w207,R.drawable.w208,R.drawable.w209,
+                            R.drawable.w210, R.drawable.w211,R.drawable.w212,R.drawable.w213,
+                            R.drawable.w300,R.drawable.w301,R.drawable.w302,R.drawable.w303,R.drawable.w304,
+                            R.drawable.w305,R.drawable.w306,R.drawable.w307,R.drawable.w308,R.drawable.w309,
+                            R.drawable.w310, R.drawable.w311,R.drawable.w312,R.drawable.w313,
+                            R.drawable.w400,R.drawable.w401,R.drawable.w402,R.drawable.w403,R.drawable.w404,
+                            R.drawable.w405,R.drawable.w406,R.drawable.w407,
+                            R.drawable.w500,R.drawable.w501,R.drawable.w502,R.drawable.w503,R.drawable.w504,
+                            R.drawable.w507,R.drawable.w508,
+                            R.drawable.w900,R.drawable.w901,R.drawable.w999,};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weather_main_layout);
+        Log.i("WeatherMainActivity:",weatherImgId.length+"");
         //==========================================
 //        if(Build.VERSION.SDK_INT>=21){
 //            View decorView=getWindow().getDecorView();
@@ -100,8 +122,6 @@ public class WeatherMainActivity extends BaseActivity {
         SharedPreferences weatherPrefercnce = getSharedPreferences("weather", MODE_PRIVATE);
         String weatherData = weatherPrefercnce.getString("weatherData", null);
         String id = weatherPrefercnce.getString("weather_id", null);
-//        Log.i("SharedPreferences:",weatherData);
-//        Log.i("SharedPreferences:",weather_id+"////"+id);
         if (weatherData == null || !weather_id.equals(id)) {
             ShowDialog();
             RequestWeatherInfor();
@@ -298,6 +318,9 @@ public class WeatherMainActivity extends BaseActivity {
         Log.i("daily_forecast:", list.size() + "");
     }
 
+    /**
+     * 天气预报的适配器
+     */
     class ForecastRecycleAdapter extends RecyclerView.Adapter<ForecastRecycleAdapter.ViewHolder> {
         List<forecast> list;
 
@@ -316,7 +339,7 @@ public class WeatherMainActivity extends BaseActivity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             forecast forecast = list.get(position);
             holder.data.setText(forecast.date);
-            holder.status_img.setImageResource(R.drawable.w100);
+            holder.status_img.setImageResource(weatherImgId[LoadCond(forecast.cond.code_d)]);
             holder.status.setText(forecast.cond.txt_d);
             holder.tp.setText(forecast.tmp.max + "/" + forecast.tmp.min + "°");
         }
@@ -341,7 +364,20 @@ public class WeatherMainActivity extends BaseActivity {
             }
         }
     }
+    /**
+     * 判断对应天气状况的图片位置
+     */
+    public int  LoadCond(String code){
+        int condPosition=0;//记录对应天气的数组位置
+        for(int i=0;i<weather_img_code.length;i++){
+            if(code.equals(weather_img_code[i])){
+                condPosition=i;
+                return condPosition;
+            }
 
+        }
+     return 50;
+    }
     /**
      * 加载必应每日一图
      */

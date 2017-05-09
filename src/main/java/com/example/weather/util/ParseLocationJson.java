@@ -96,7 +96,7 @@ public class ParseLocationJson {
 
         //天气的所有信息都包含在HeWeather5这个大括号里面，得先把HeWeather5内的内容给解析出来
         try {
-              Log.i("11111",response);
+              Log.i("handleWeatherRequest:",response);
 //            JSONArray weatherInfo=new JSONArray(response);
 //            JSONObject jsonObject=weatherInfo.getJSONObject(0);
 //            String HeWeather5=jsonObject.getString("HeWeather5");

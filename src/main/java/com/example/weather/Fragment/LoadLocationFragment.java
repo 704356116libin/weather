@@ -65,17 +65,17 @@ public class LoadLocationFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view=inflater.inflate(R.layout.loadlocation_frag_layout,container,false);
         SharedPreferences weatherPrefercnce=getActivity().getSharedPreferences("weather", Context.MODE_PRIVATE);
-        String weatherData=weatherPrefercnce.getString("weatherData",null);
+
         String id=weatherPrefercnce.getString("weather_id",null);
+        //该SharedPreferences用来判断是否是在天气界面通过设置位置按钮跳转过来的
          selectShare=getActivity().getSharedPreferences("seclectLocation", Context.MODE_PRIVATE);
         boolean isSelect=selectShare.getBoolean("isSelect",false);
-        if (weatherData!=null&isSelect==false) {
+        if (id!=null&isSelect==false) {
             WeatherMainActivity.actionStartActivity(getContext(),id);
             getActivity().finish();
         }
-
-        view=inflater.inflate(R.layout.loadlocation_frag_layout,container,false);
         init();
         return view;
     }
