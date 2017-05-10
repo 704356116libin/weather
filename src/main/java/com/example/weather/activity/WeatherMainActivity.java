@@ -109,7 +109,6 @@ public class WeatherMainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weather_main_layout);
-        Log.i("WeatherMainActivity:",weatherImgId.length+"");
         //==========================================
 //        if(Build.VERSION.SDK_INT>=21){
 //            View decorView=getWindow().getDecorView();
@@ -122,10 +121,17 @@ public class WeatherMainActivity extends BaseActivity {
         SharedPreferences weatherPrefercnce = getSharedPreferences("weather", MODE_PRIVATE);
         String weatherData = weatherPrefercnce.getString("weatherData", null);
         String id = weatherPrefercnce.getString("weather_id", null);
-        if (weatherData == null || !weather_id.equals(id)) {
+        Log.i("WeatherMainActivity:",id+"");
+        if(weather_id!=null){
+        if (!weather_id.equals(id)) {
             ShowDialog();
             RequestWeatherInfor();
             CloseDialog();
+        }
+        else {
+            weather = ParseLocationJson.handleWeatherRequest(weatherData);
+            ShowInforOnUi();
+        }
         } else {
             weather = ParseLocationJson.handleWeatherRequest(weatherData);
             ShowInforOnUi();
@@ -146,15 +152,14 @@ public class WeatherMainActivity extends BaseActivity {
                 final String data = response.body().string();
                 SharedPreferences weatherPrefercnce = getSharedPreferences("weather", MODE_PRIVATE);
                 SharedPreferences.Editor editor = weatherPrefercnce.edit();
-                editor.putString("weatherData", data);
-                editor.putString("weather_id", weather_id);
-                editor.commit();
+                editor.putString("weatherData", data);//将天气Json放入SharedPreferences中
+                editor.putString("weather_id", weather_id);//将所选城市的天气代码放入到SharedPreferences中
+                editor.commit();//提交操作
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         weather = ParseLocationJson.handleWeatherRequest(data);
                         ShowInforOnUi();
-
                     }
                 });
 
@@ -220,6 +225,7 @@ public class WeatherMainActivity extends BaseActivity {
                 SharedPreferences.Editor editor = selectShare.edit();
                 editor.putBoolean("isSelect", true);
                 editor.commit();
+                //跳转到选择城市的页面。并结束当前活动
                 Intent intent = new Intent(WeatherMainActivity.this, Weather.class);
                 WeatherMainActivity.this.startActivity(intent);
                 finish();
@@ -285,16 +291,8 @@ public class WeatherMainActivity extends BaseActivity {
             aqi_pm25Text.setText(weather.aqi.city.pm25);
             String data=weather.basic.update.loc;
             String str[]=data.split(" ",2);//以空格将服务器更新日期截取为两段
-            aqi_dataText.setText(str[1]);
+            aqi_dataText.setText(str[1]+"发布");
         }
-//        //加载必应每日一图
-//        SharedPreferences bingImgShare=getSharedPreferences("bingImg",MODE_PRIVATE);
-//        String bingImg=bingImgShare.getString("bingImg",null);
-//        if (bingImg==null){
-//            LoadBiYingImg();
-//        }else {
-//            Glide.with(WeatherMainActivity.this).load(bingImg).into(weather_bgImg);
-//        }
         weather_now_temperature_text.setText(weather.now.tmp + "°");//设置当前温度
         weather_now_status_text.setText(weather.basic.city + "/" + weather.now.cond.txt);//显示现在天气状态(风力/天气状况)
         weather_now_windDirection_text.setText(weather.now.wind.dir);//显示现在风向
@@ -338,7 +336,9 @@ public class WeatherMainActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             forecast forecast = list.get(position);
-            holder.data.setText(forecast.date);
+            String data=forecast.date;
+            String[]str=data.split("-",2);
+            holder.data.setText(str[1]);
             holder.status_img.setImageResource(weatherImgId[LoadCond(forecast.cond.code_d)]);
             holder.status.setText(forecast.cond.txt_d);
             holder.tp.setText(forecast.tmp.max + "/" + forecast.tmp.min + "°");
@@ -377,34 +377,6 @@ public class WeatherMainActivity extends BaseActivity {
 
         }
      return 50;
-    }
-    /**
-     * 加载必应每日一图
-     */
-    public void LoadBiYingImg(){
-        String imagUrl="http://guolin.tech/api/bing_pic";
-        HttpUtil.sendOkHttpRequest(imagUrl, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                final String bingImg=response.body().string();//拿到图片的url
-                SharedPreferences bingImgShare=getSharedPreferences("bingImg",MODE_PRIVATE);
-                SharedPreferences.Editor editor=bingImgShare.edit();
-                editor.putString("bingImg",bingImg);
-                editor.apply();
-                //更新图片
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Glide.with(WeatherMainActivity.this).load(bingImg).into(weather_bgImg);
-                    }
-                });
-            }
-        });
     }
     public void ShowDialog() {
         if (progressDialog == null) {

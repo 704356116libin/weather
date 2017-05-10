@@ -17,4 +17,5 @@ public class weather {
     public List<forecast>daily_forecast;
     public now now;
     public suggestion suggestion;
+    public alarms alarms;
 }

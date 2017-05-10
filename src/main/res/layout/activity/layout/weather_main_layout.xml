@@ -33,7 +33,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="5dp"
                     android:background="@color/colorViewBack" />
-
+                <TextView
+                    android:textSize="13dp"
+                    android:text="三天预报："
+                    android:gravity="center_vertical"
+                    android:layout_height="30dp"
+                    android:layout_width="match_parent"
+                    />
                 <include layout="@layout/forecast" />
 
                 <View

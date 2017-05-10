@@ -4,13 +4,13 @@
     android:id="@+id/weater_now_layout"
     android:layout_width="match_parent"
     android:layout_height="350dp"
-    android:background="#1C978B8B"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <android.support.percent.PercentRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#6699ccl">
+        android:background="#6699cc">
         <ImageView
             android:id="@+id/weather_bgImg"
             android:layout_width="match_parent"
@@ -23,7 +23,6 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
             android:gravity="right|bottom"
-            android:text="18°"
             android:textColor="#ffffff"
             android:textSize="55dp"
             app:layout_heightPercent="30%" />
@@ -55,7 +54,6 @@
                     android:layout_width="match_parent"
                     android:layout_alignParentTop="true"
                     android:gravity="center"
-                    android:hint="北风"
                     android:textColor="@color/textColor"
                     android:textSize="13dp"
                     app:layout_heightPercent="40%" />
@@ -65,7 +63,6 @@
                     android:layout_width="match_parent"
                     android:layout_alignParentBottom="true"
                     android:gravity="center|top"
-                    android:hint="3级"
                     android:textColor="@color/textColor"
                     android:textSize="25dp"
                     app:layout_heightPercent="60%" />
@@ -98,7 +95,6 @@
                     android:layout_width="match_parent"
                     android:layout_alignParentBottom="true"
                     android:gravity="center|top"
-                    android:hint="15%"
                     android:textColor="@color/textColor"
                     android:textSize="25dp"
                     app:layout_heightPercent="60%" />
@@ -130,7 +126,6 @@
                     android:layout_width="match_parent"
                     android:layout_alignParentBottom="true"
                     android:gravity="center|top"
-                    android:hint="23°"
                     android:textColor="@color/textColor"
                     android:textSize="25dp"
                     app:layout_heightPercent="60%" />

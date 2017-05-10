@@ -37,14 +37,14 @@ public class AutoUpdataWeather extends Service {
 
     @Override
     public void onCreate() {
-        super.onCreate();
         //
         SharedPreferences weatherPrefercnce = getSharedPreferences("weather", MODE_PRIVATE);
         String weatherData=weatherPrefercnce.getString("weatherData",null);
         weather weather=ParseLocationJson.handleWeatherRequest(weatherData);
         //若服务器接口状态为ok且确实有数据的时候
         if(weather!=null&&"ok".equals(weather.status)){
-            Intent intent=new Intent(this, WeatherMainActivity.class);
+            Intent intent=new Intent(AutoUpdataWeather.this, WeatherMainActivity.class);
+            //当点击这个通知，设置意图
             PendingIntent pi=PendingIntent.getActivity(this,0,intent,0);
             //创建一个通知
             Notification notification=new NotificationCompat.Builder(this)
@@ -63,7 +63,6 @@ public class AutoUpdataWeather extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         UpdataWeather();
-        LoadBiYingImg();
         //创建定时任务，拿到AlarmManager
         AlarmManager manager= (AlarmManager) getSystemService(ALARM_SERVICE);//定时服务
         int hour=60*60;//设定间隔为一小时
@@ -75,31 +74,6 @@ public class AutoUpdataWeather extends Service {
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,triggerAtTime,pendingIntent);
         return super.onStartCommand(intent, flags, startId);
     }
-
-    /**
-     * 加载每日一图
-     */
-    private void LoadBiYingImg() {
-        //访问这个网址，会返回每日一图图片的url地址
-        String url="http://guolin.tech/api/bing_pic";
-        HttpUtil.sendOkHttpRequest(url, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String bingImg=response.body().string();//拿到图片的url
-                //将图片的url地址存取到bingImg SharedPreferences中，用来用Glide加载
-                SharedPreferences bingImgShare=getSharedPreferences("bingImg",MODE_PRIVATE);
-                SharedPreferences.Editor editor=bingImgShare.edit();
-                editor.putString("bingImg",bingImg);
-                editor.apply();
-            }
-        });
-    }
-
     /**
      * 自动更新天气
      */
@@ -117,15 +91,14 @@ public class AutoUpdataWeather extends Service {
             HttpUtil.sendOkHttpRequest(url, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-
                 }
-
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     //将新的天气Json存到SharePercence中
-                    String weatherData=response.body().string();
-                    weather weather=ParseLocationJson.handleWeatherRequest(weatherData);
-                    if(weather!=null&&"ok".equals(weather.status)) {
+                    String weatherData=response.body().string();//将weatherData转化为字符串信息
+                    weather weather=ParseLocationJson.handleWeatherRequest(weatherData);//调用解析天气Json数据的方法
+                    //若服务器返回天气Json返回值状态为ok的时候将weatherData存储到SharedPreferences中
+                    if("ok".equals(weather.status)) {
                         SharedPreferences.Editor editor = weatherPrefercnce.edit();
                         editor.putString("weatherData", weatherData);
                         editor.commit();

@@ -22,7 +22,6 @@
             android:layout_width="40dp"
             android:layout_height="40dp" />
         <TextView
-            android:hint="中"
             android:textSize="13dp"
             android:gravity="center_vertical"
             android:id="@+id/weather_suggestion_comf_brf_text"
@@ -35,7 +34,6 @@
             android:layout_toRightOf="@+id/weather_suggestion_comf_img"
             android:gravity="center_vertical"
             android:textSize="10dp"
-            android:hint="气象条件对空气污染物稀释、扩散和清除无明显影响，易感人群应适当减少室外活动时间。"
             android:layout_width="match_parent"
             android:layout_height="25dp" />
     </RelativeLayout>
@@ -63,7 +61,6 @@
             android:layout_width="40dp"
             android:layout_height="40dp" />
         <TextView
-            android:hint="中"
             android:textSize="13dp"
             android:gravity="center_vertical"
             android:id="@+id/weather_suggestion_drsg_brf_text"
@@ -76,7 +73,6 @@
             android:layout_toRightOf="@+id/weather_suggestion_drsg_img"
             android:gravity="center_vertical"
             android:textSize="10dp"
-            android:hint="气象条件对空气污染物稀释、扩散和清除无明显影响，易感人群应适当减少室外活动时间。"
             android:layout_width="match_parent"
             android:layout_height="25dp" />
     </RelativeLayout>
@@ -104,7 +100,6 @@
             android:layout_width="40dp"
             android:layout_height="40dp" />
         <TextView
-            android:hint="中"
             android:textSize="13dp"
             android:gravity="center_vertical"
             android:id="@+id/weather_suggestion_flu_brf_text"
@@ -117,7 +112,6 @@
             android:layout_toRightOf="@+id/weather_suggestion_flu_img"
             android:gravity="center_vertical"
             android:textSize="10dp"
-            android:hint="气象条件对空气污染物稀释、扩散和清除无明显影响，易感人群应适当减少室外活动时间。"
             android:layout_width="match_parent"
             android:layout_height="25dp" />
     </RelativeLayout>
@@ -155,7 +149,6 @@
             android:layout_height="15dp"
             android:layout_toRightOf="@+id/weather_suggestion_sport_img"
             android:gravity="center_vertical"
-            android:hint="中"
             android:textSize="13dp" />
 
         <TextView
@@ -165,12 +158,10 @@
             android:layout_below="@+id/weather_suggestion_sport_brf_text"
             android:layout_toRightOf="@+id/weather_suggestion_sport_img"
             android:gravity="center_vertical"
-            android:hint="气象条件对空气污染物稀释、扩散和清除无明显影响，易感人群应适当减少室外活动时间。"
             android:textSize="10dp" />
     </RelativeLayout>
     <View
-        android:layout_marginLeft="40dp"
-        android:background="#6699cc"
         android:layout_width="match_parent"
-        android:layout_height="2dp"/>
+        android:layout_height="5dp"
+        android:background="@color/colorViewBack" />
 </LinearLayout>

@@ -28,14 +28,12 @@
         android:layout_toRightOf="@+id/view1"
         android:textSize="10dp"
         android:gravity="center_vertical"
-        android:hint="中毒污染"
         android:layout_width="55dp"
         android:layout_height="30dp" />
     <TextView
         android:id="@+id/aqi_dataText"
         android:textSize="8dp"
         android:gravity="center"
-        android:hint="18:00发布"
         android:layout_alignParentRight="true"
         android:layout_width="60dp"
         android:layout_height="30dp" />
