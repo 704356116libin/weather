@@ -3,147 +3,178 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
         android:layout_marginLeft="2dp"
-        android:text="体感舒适："
         android:gravity="center_vertical"
-        android:textSize="13dp"
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:text="体感舒适："
+        android:textSize="13dp" />
+
     <RelativeLayout
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="50dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp">
+
         <ImageView
+            android:layout_marginTop="5dp"
             android:id="@+id/weather_suggestion_comf_img"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/w100"
-            android:layout_width="40dp"
-            android:layout_height="40dp" />
+            android:src="@drawable/feel" />
+
         <TextView
-            android:textSize="13dp"
-            android:gravity="center_vertical"
             android:id="@+id/weather_suggestion_comf_brf_text"
-            android:layout_toRightOf="@+id/weather_suggestion_comf_img"
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/weather_suggestion_comf_img"
+            android:gravity="center_vertical"
+            android:textSize="13dp" />
+
         <TextView
             android:id="@+id/weather_suggestion_comf_txt_text"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
             android:layout_below="@+id/weather_suggestion_comf_brf_text"
+            android:layout_marginLeft="15dp"
             android:layout_toRightOf="@+id/weather_suggestion_comf_img"
             android:gravity="center_vertical"
-            android:textSize="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            android:textSize="10dp" />
     </RelativeLayout>
+
     <View
-        android:layout_marginLeft="40dp"
-        android:background="#6699cc"
         android:layout_width="match_parent"
-        android:layout_height="2dp"/>
+        android:layout_height="1dp"
+        android:layout_marginLeft="50dp"
+        android:background="#6699cc" />
+
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
         android:layout_marginLeft="2dp"
-        android:text="穿衣指数："
         android:gravity="center_vertical"
-        android:textSize="13dp"
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:text="穿衣指数："
+        android:textSize="13dp" />
+
     <RelativeLayout
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="50dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp">
+
         <ImageView
+            android:layout_marginTop="5dp"
+
             android:id="@+id/weather_suggestion_drsg_img"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/w100"
-            android:layout_width="40dp"
-            android:layout_height="40dp" />
+            android:src="@drawable/drsg" />
+
         <TextView
-            android:textSize="13dp"
-            android:gravity="center_vertical"
             android:id="@+id/weather_suggestion_drsg_brf_text"
-            android:layout_toRightOf="@+id/weather_suggestion_drsg_img"
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/weather_suggestion_drsg_img"
+            android:gravity="center_vertical"
+            android:textSize="13dp" />
+
         <TextView
             android:id="@+id/weather_suggestion_drsg_txt_text"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
             android:layout_below="@+id/weather_suggestion_drsg_brf_text"
+            android:layout_marginLeft="15dp"
             android:layout_toRightOf="@+id/weather_suggestion_drsg_img"
             android:gravity="center_vertical"
-            android:textSize="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            android:textSize="10dp" />
     </RelativeLayout>
+
     <View
-        android:layout_marginLeft="40dp"
-        android:background="#6699cc"
         android:layout_width="match_parent"
-        android:layout_height="2dp"/>
+        android:layout_height="1dp"
+        android:layout_marginLeft="50dp"
+        android:background="#6699cc" />
+
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
         android:layout_marginLeft="2dp"
-        android:text="感冒预防："
         android:gravity="center_vertical"
-        android:textSize="13dp"
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:text="感冒预防："
+        android:textSize="13dp" />
+
     <RelativeLayout
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="50dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp">
+
         <ImageView
+            android:layout_marginTop="5dp"
             android:id="@+id/weather_suggestion_flu_img"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/w100"
-            android:layout_width="40dp"
-            android:layout_height="40dp" />
+            android:src="@drawable/flu" />
+
         <TextView
-            android:textSize="13dp"
-            android:gravity="center_vertical"
+
             android:id="@+id/weather_suggestion_flu_brf_text"
-            android:layout_toRightOf="@+id/weather_suggestion_flu_img"
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/weather_suggestion_flu_img"
+            android:gravity="center_vertical"
+            android:textSize="13dp" />
+
         <TextView
+            android:layout_marginLeft="15dp"
             android:id="@+id/weather_suggestion_flu_txt_text"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
             android:layout_below="@+id/weather_suggestion_flu_brf_text"
             android:layout_toRightOf="@+id/weather_suggestion_flu_img"
             android:gravity="center_vertical"
-            android:textSize="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            android:textSize="10dp" />
     </RelativeLayout>
-    <View
-        android:layout_marginLeft="40dp"
-        android:background="#6699cc"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"/>
-    <TextView
-        android:layout_marginLeft="2dp"
-        android:text="运动建议："
-        android:gravity="center_vertical"
-        android:textSize="13dp"
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="50dp"
+        android:background="#6699cc" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginLeft="2dp"
+        android:gravity="center_vertical"
+        android:text="运动建议："
+        android:textSize="13dp" />
 
 
     <RelativeLayout
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="50dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp">
 
         <ImageView
+            android:layout_marginTop="5dp"
             android:id="@+id/weather_suggestion_sport_img"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/w100" />
+            android:src="@drawable/sport" />
 
         <TextView
+            android:layout_marginLeft="15dp"
             android:id="@+id/weather_suggestion_sport_brf_text"
             android:layout_width="match_parent"
             android:layout_height="15dp"
@@ -152,6 +183,7 @@
             android:textSize="13dp" />
 
         <TextView
+            android:layout_marginLeft="15dp"
             android:id="@+id/weather_suggestion_sport_txt_text"
             android:layout_width="match_parent"
             android:layout_height="25dp"
@@ -160,6 +192,7 @@
             android:gravity="center_vertical"
             android:textSize="10dp" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/weather_alarmsLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+<TextView
+    android:id="@+id/alarms_text"
+    android:layout_width="wrap_content"
+    android:layout_height="20dp"
+    android:textSize="13dp"
+    android:text="山东省青岛市气象台发布大风蓝色预警"
+    android:gravity="center_vertical"
+    android:textColor="@color/textColor"/>
+    <ImageView
+        android:src="@drawable/forward"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
+</LinearLayout>

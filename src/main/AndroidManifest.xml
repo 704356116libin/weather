@@ -7,15 +7,14 @@
     <application
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
-        android:icon="@drawable/w100"
+        android:icon="@drawable/weather_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.WeatherMainActivity"
-            android:launchMode="singleTask"
-            ></activity>
+            android:launchMode="singleTask" />
         <activity android:name=".activity.Weather">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +26,8 @@
         <service
             android:name=".service.AutoUpdataWeather"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
+
     </application>
 
 </manifest>

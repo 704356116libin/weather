@@ -48,10 +48,10 @@ public class AutoUpdataWeather extends Service {
             PendingIntent pi=PendingIntent.getActivity(this,0,intent,0);
             //创建一个通知
             Notification notification=new NotificationCompat.Builder(this)
-                    .setContentTitle(weather.now.cond.txt+"  "+weather.now.tmp+"°")
+                    .setContentTitle(weather.basic.city+"/"+weather.now.cond.txt+"  "+weather.now.tmp+"°")
                     .setContentText("空气质量："+weather.aqi.city.qlty)
-                    .setSmallIcon(R.drawable.w100)
-                    .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.w100))
+                    .setSmallIcon(R.drawable.weather_icon)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.weather_icon))
                     .setContentIntent(pi)
                     .build();
             startForeground(1,notification);
@@ -65,7 +65,7 @@ public class AutoUpdataWeather extends Service {
         UpdataWeather();
         //创建定时任务，拿到AlarmManager
         AlarmManager manager= (AlarmManager) getSystemService(ALARM_SERVICE);//定时服务
-        int hour=60*60;//设定间隔为一小时
+        int hour=60;//设定间隔为一小时
         long triggerAtTime= SystemClock.elapsedRealtime()+hour;
         //间隔一定时间重新唤醒该服务
         Intent i=new Intent(this,AutoUpdataWeather.class);

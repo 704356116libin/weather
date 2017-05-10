@@ -105,6 +105,9 @@ public class WeatherMainActivity extends BaseActivity {
                             R.drawable.w500,R.drawable.w501,R.drawable.w502,R.drawable.w503,R.drawable.w504,
                             R.drawable.w507,R.drawable.w508,
                             R.drawable.w900,R.drawable.w901,R.drawable.w999,};
+    //=====================天气预警信息============================================
+    private LinearLayout alarms_layout;
+    private TextView alarmsText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,6 +174,10 @@ public class WeatherMainActivity extends BaseActivity {
      * 初始化各种控件
      */
     private void init() {
+        //=====================天气预警信息============================================
+         alarms_layout= (LinearLayout) findViewById(R.id.weather_alarmsLayout);
+        alarms_layout.setVisibility(View.GONE);//默认为不显示
+         alarmsText= (TextView) findViewById(R.id.alarms_text);
         //悬浮按钮
         SeclectLocation= (FloatingActionButton) findViewById(R.id.Seclect_location_but);
         //下拉刷新布局
@@ -292,6 +299,11 @@ public class WeatherMainActivity extends BaseActivity {
             String data=weather.basic.update.loc;
             String str[]=data.split(" ",2);//以空格将服务器更新日期截取为两段
             aqi_dataText.setText(str[1]+"发布");
+        }
+        //======================设置预警信息============================
+        if(weather.alarms!=null){
+            alarms_layout.setVisibility(View.INVISIBLE);//将预警信息的布局设置为可见
+            alarmsText.setText(weather.alarms.title);
         }
         weather_now_temperature_text.setText(weather.now.tmp + "°");//设置当前温度
         weather_now_status_text.setText(weather.basic.city + "/" + weather.now.cond.txt);//显示现在天气状态(风力/天气状况)

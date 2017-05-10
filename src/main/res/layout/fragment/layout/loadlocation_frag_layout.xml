@@ -17,12 +17,12 @@
             android:layout_height="30dp"
             app:layout_widthPercent="10%" />
         <TextView
+            android:textColor="#ffffff"
             android:id="@+id/loadLocation_text"
             android:layout_toRightOf="@+id/loadLocation_back_but"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:gravity="center"
-            android:hint="此处显示文字"
             />
     </android.support.percent.PercentRelativeLayout>
     <ListView
