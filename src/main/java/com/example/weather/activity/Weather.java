@@ -2,11 +2,9 @@ package com.example.weather.activity;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.util.Log;
 
 import com.example.weather.Base.BaseActivity;
 import com.example.weather.R;
@@ -25,10 +23,16 @@ public class Weather extends BaseActivity {
     public void onBackPressed() {
         SharedPreferences weatherPrefercnce=Weather.this.getSharedPreferences("weather", Context.MODE_PRIVATE);
         String id=weatherPrefercnce.getString("weather_id",null);
+        Log.i("Weather:",id);
+        //
+        SharedPreferences selectShare=getSharedPreferences("seclectLocation",MODE_PRIVATE);
+        SharedPreferences.Editor editor=selectShare.edit();
         if (id==null){
             super.onBackPressed();
         }else {
             WeatherMainActivity.actionStartActivity(Weather.this, id);
+            editor.putBoolean("isSelect",false);
+            editor.commit();
             finish();
         }
     }

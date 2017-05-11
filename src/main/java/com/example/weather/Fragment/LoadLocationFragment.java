@@ -2,7 +2,6 @@ package com.example.weather.Fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.weather.R;
-import com.example.weather.activity.Weather;
 import com.example.weather.activity.WeatherMainActivity;
 import com.example.weather.db.City;
 import com.example.weather.db.County;
