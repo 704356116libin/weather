@@ -50,8 +50,8 @@ public class AutoUpdataWeather extends Service {
             Notification notification=new NotificationCompat.Builder(this)
                     .setContentTitle(weather.basic.city+"/"+weather.now.cond.txt+"  "+weather.now.tmp+"°")
                     .setContentText("空气质量："+weather.aqi.city.qlty)
-                    .setSmallIcon(R.drawable.weather_icon)
-                    .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.weather_icon))
+                    .setSmallIcon(R.drawable.icon)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.icon))
                     .setContentIntent(pi)
                     .build();
             startForeground(1,notification);

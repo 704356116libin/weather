@@ -9,7 +9,7 @@
     <android.support.percent.PercentRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#6699cc">
+        android:background="@color/refershColor">
         <ImageView
             android:id="@+id/weather_bgImg"
             android:layout_width="match_parent"
